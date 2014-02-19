@@ -12,44 +12,20 @@
         <link rel="stylesheet" href="{{ STATIC_URL }}lib/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
         <script src="{{ STATIC_URL }}lib/modernizr/modernizr.js"></script>
-
     </head>
+
     <body>
         <!--[if lt IE 10]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-
-        <div class="container">
-            <div class="header">
-                <ul class="nav nav-pills pull-right">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <h3 class="text-muted">webapp</h3>
-            </div>
-
-            <div class="jumbotron">
-                <h1>'Allo, 'Allo!</h1>
-                <p class="lead">Always a pleasure scaffolding your apps.</p>
-                <p><a class="btn btn-lg btn-success" href="#">Splendid!</a></p>
-            </div>
-
-            <div class="row marketing">
-                <div class="col-lg-6">
-                    {% block main %}
-                    {% endblock %}
-                </div>
-            </div>
-
-            <div class="footer">
-            </div>
-
-        </div>
-
+        {% block main %}
+        {% endblock %}
 
         <script src="{{ STATIC_URL }}lib/jquery/jquery.js"></script>
+        <script src="{{ STATIC_URL }}lib/angular.js"></script>
+        <script src="{{ STATIC_URL }}lib/datatables/js/jquery.dataTables.js"></script>
+        <script src="{{ STATIC_URL }}lib/bootstrap/js/bootstrap.min.js"></script>
         <script src="{{ STATIC_URL }}js/main.js"></script>
-</body>
+    </body>
 </html>

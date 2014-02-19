@@ -1,3 +1,55 @@
+//获取指定范围内的随机整数
+function GetRandomInteger(start, end){
+    return Math.round(Math.random()*(end - start)+start);
+}
+
+//获取任意长度的随机（字符和数字）串  
+function GetRandomString(length)  
+{  
+    var rand="";  
+    for(var i=0;i<length;i++){  
+        if(i%2==0) {rand+=String.fromCharCode(Randomletter());}  
+        else       {rand+=RandomNumber();}  
+    }  
+    return rand;  
+}  
+
+//获取65-90的随机数用于根据Ascall码表产生随机大写字母  
+function Randomletter()  
+{  
+    var rand=Math.floor(Math.random()*25)+65;  
+    return rand;  
+}  
+
+//获取0-9的随机数  
+function RandomNumber()  
+{  
+    var rand=Math.floor(Math.random()*9);  
+    return rand;  
+}  
+
+
+
+
+
+var boat_count = 2000;
+var map_size = [15, 835, 0, 470];
+var path_count = [9, 20];
+var boat_name_length = 8;
+
+function createBoats(){
+    var boats = [];
+    for (var k=1; k<=boat_count; k++){
+        var path = [];
+        for (var i=0; i<GetRandomInteger(path_count[0], path_count[1]); i++){
+            path.push([GetRandomInteger(map_size[0],map_size[1]), GetRandomInteger(map_size[2],map_size[3])]);
+        }
+        var boat = {id:k, name:GetRandomString(boat_name_length), follow:false, path:path};
+        boats.push(boat);
+    }
+    return boats;
+}
+
 
 var map = $('#map');
 
@@ -14,7 +66,7 @@ function removeboat(id){
 }
 
 function moveboat(id, start, end){
-    var timerId, startTime, frameTime = 10, dur = 5 * 1000;
+    var timerId, startTime, frameTime = 10, dur = 3 * 1000;
     var lx = end[0] - start[0];
     var ly = end[1] - start[1];
     function animFun(time){
@@ -22,8 +74,12 @@ function moveboat(id, start, end){
         if(per >= 1) {
             clearTimeout(timerId);
         }else{
-            document.getElementById(id).style.left = Math.round(start[0] + lx * per) + "px";
-            document.getElementById(id).style.top= Math.round(start[1] + ly * per) + "px";
+            try{
+                document.getElementById(id).style.left = Math.round(start[0] + lx * per) + "px";
+                document.getElementById(id).style.top= Math.round(start[1] + ly * per) + "px";
+            }catch(e){
+                clearTimeout(timerId);
+            }
         }
     }
     function move(){
@@ -59,8 +115,12 @@ function moveboat_by_path(id, path){
                 clearTimeout(timerId);
             }
         }else{
-            document.getElementById(id).style.left = Math.round(start[0] + lx * per) + "px";
-            document.getElementById(id).style.top= Math.round(start[1] + ly * per) + "px";
+            try{
+                document.getElementById(id).style.left = Math.round(start[0] + lx * per) + "px";
+                document.getElementById(id).style.top= Math.round(start[1] + ly * per) + "px";
+            }catch(e){
+                clearTimeout(timerId);
+            }
         }
     }
     function move(){
@@ -83,27 +143,7 @@ MapModule.config(function($interpolateProvider){
 MapModule.controller("BoatCtrl",
     function($scope) {
 
-        $scope.boats = [
-            {id:1, name:'aa', follow:false, path:[[300,120],[23,23],[343,35],[346,67]]},
-            {id:2, name:'bb', follow:false, path:[[100,120],[23,23],[343,35],[346,67]]},
-            {id:3, name:'cc', follow:false, path:[[300,120],[23,23],[343,35],[346,67]]},
-            {id:4, name:'dd', follow:false, path:[[100,120],[23,23],[343,35],[346,67]]},
-            {id:5, name:'ee', follow:false, path:[[300,120],[23,23],[343,35],[346,67]]},
-            {id:6, name:'fw', follow:false, path:[[100,120],[23,23],[343,35],[346,67]]},
-            {id:7, name:'gw', follow:false, path:[[100,120],[23,23],[343,35],[346,67]]},
-            {id:8, name:'hl', follow:false, path:[[100,120],[23,23],[343,35],[346,67]]},
-            {id:9, name:'jl', follow:false, path:[[100,120],[23,23],[343,35],[346,67]]},
-            {id:10, name:'il', follow:false, path:[[100,120],[23,23],[343,35],[346,67]]},
-            {id:11, name:'kl', follow:false, path:[[23,23],[343,35],[0,0],[346,67]]},
-            {id:12, name:'le', follow:false, path:[[23,23],[343,35],[0,0],[346,67]]},
-            {id:13, name:'me', follow:false, path:[[23,23],[343,35],[0,0],[346,67]]},
-            {id:14, name:'nw', follow:false, path:[[23,23],[343,35],[0,0],[346,67]]},
-            {id:15, name:'oe', follow:false, path:[[23,23],[343,35],[0,0],[346,67]]},
-            {id:16, name:'pp', follow:false, path:[[23,23],[343,35],[0,0],[346,67]]},
-            {id:17, name:'qq', follow:false, path:[[23,23],[343,35],[0,0],[346,67]]},
-            {id:18, name:'rr', follow:false, path:[[23,23],[343,35],[0,0],[346,67]]},
-            {id:19, name:'ss', follow:false, path:[[23,23],[343,35],[0,0],[346,67]]}
-        ];
+        $scope.boats = createBoats();
 
         $scope.followcount = function() {
             var count = 0;

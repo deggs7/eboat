@@ -106,5 +106,40 @@ body {
 }
 
 #map{
-    padding: 50px;
+    width:850px;
+    height:500px;
+    background-color: #BDD9F5;
+    margin-bottom: 20px;
+}
+
+.cabinet {
+}
+.cabinet img {
+    margin-top: 200px;
+    width: 60px;
+    height: 100px;
+}
+.host-info {
+}
+.host-info img {
+    width: 50px;
+    height: 50px;
+}
+
+.host-status {
+    width:14px;
+    height:14px;
+    border-radius: 7px;
+    background-color: gray;
+    display: inline-block;
+}
+
+.status-running {
+    background-color: green;
+}
+.status-sleep {
+    background-color: orange;
+}
+.status-poweroff {
+    background-color: orangered;
 }

@@ -32,10 +32,10 @@ function RandomNumber()
 
 
 
-var boat_count = 2000;
-var map_size = [15, 835, 0, 470];
-var path_count = [9, 20];
-var boat_name_length = 8;
+var boat_count = 20; //船的数量
+var map_size = [15, 835, 0, 470]; //地图的活跃范围
+var path_count = [9, 20]; //每支船的路径条数，在给定范围内的随机整数
+var boat_name_length = 8; //船编号的长度
 
 function createBoats(){
     var boats = [];
@@ -63,31 +63,6 @@ function addboat(id, x, y){
 
 function removeboat(id){
     $("#"+id).remove();
-}
-
-function moveboat(id, start, end){
-    var timerId, startTime, frameTime = 10, dur = 3 * 1000;
-    var lx = end[0] - start[0];
-    var ly = end[1] - start[1];
-    function animFun(time){
-        var per = Math.min(1.0, (new Date - startTime) / dur);
-        if(per >= 1) {
-            clearTimeout(timerId);
-        }else{
-            try{
-                document.getElementById(id).style.left = Math.round(start[0] + lx * per) + "px";
-                document.getElementById(id).style.top= Math.round(start[1] + ly * per) + "px";
-            }catch(e){
-                clearTimeout(timerId);
-            }
-        }
-    }
-    function move(){
-        addboat(id, start[0], start[1]);
-        startTime = new Date;
-        timerId = setInterval(animFun, frameTime);
-    }
-    return move;
 }
 
 function moveboat_by_path(id, path){
@@ -182,17 +157,6 @@ MapModule.controller("BoatCtrl",
 );//end of controller
 
 $(function(){
-    $(document).ready(function(){
-
-        $('#boatTable').dataTable();
-        /*
-        $('#boatTable').dataTable({
-            "bInfo": false,
-            "aoColumnDefs": [{'bSortable': false, 'aTargets': [-1]}, { "bSearchable": false, "aTargets": [-1]}]
-        });
-        */
-
-    });//end of angular.element.ready
 });//end of function
 
 

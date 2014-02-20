@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <td width="100px">机柜</td>
+                    <td width="150px">物理服务器</td>
+                    <td width="">运行监控</td>
+                    <td width="300px">虚拟机</td>
+                </tr>
+                </thead>
+                <tr>
+                    <td rowspan="4" class="cabinet">
+                        <p class="text-center">
+                            <img src="/static/img/cabinet.jpg" alt=""/>
+                        </p>
+                        <p class="text-center">
+                            机柜1
+                        </p>
+                    </td>
+                    <td class="host-info">
+                        <p>
+                            <img src="/static/img/host.jpg" alt=""/>
+                            服务器1
+                        </p>
+                        <p>CPU: 4核心</p>
+                        <p>内存: 16G</p>
+                        <p>硬盘: 2000G</p>
+                    </td>
+                    <td>
+                        <canvas id="myChart" class="hostChart" width="600" height="150"></canvas>
+                    </td>
+                    <td>
+                        <div>28374634<div class="host-status status-running"></div></div>
+                        <div>98377633<div class="host-status status-poweroff"></div></div>
+                        <div>38379636<div class="host-status status-running"></div></div>
+                        <div>78377637<div class="host-status status-sleep"></div></div>
+                        <div>88376639<div class="host-status status-running"></div></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="host-info">
+                        <p>
+                            <img src="/static/img/host.jpg" alt=""/>
+                            服务器1
+                        </p>
+                        <p>CPU: 4核心</p>
+                        <p>内存: 16G</p>
+                        <p>硬盘: 2000G</p>
+                    </td>
+                    <td>
+                        <canvas id="myChart" class="hostChart" width="600" height="150"></canvas>
+                    </td>
+                    <td>
+                        <div>28374634<div class="host-status status-running"></div></div>
+                        <div>98377633<div class="host-status status-poweroff"></div></div>
+                        <div>38379636<div class="host-status status-running"></div></div>
+                        <div>78377637<div class="host-status status-sleep"></div></div>
+                        <div>88376639<div class="host-status status-running"></div></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="host-info">
+                        <p>
+                            <img src="/static/img/host.jpg" alt=""/>
+                            服务器1
+                        </p>
+                        <p>CPU: 4核心</p>
+                        <p>内存: 16G</p>
+                        <p>硬盘: 2000G</p>
+                    </td>
+                    <td>
+                        <canvas id="myChart" class="hostChart" width="600" height="150"></canvas>
+                    </td>
+                    <td>
+                        <div>28374634<div class="host-status status-running"></div></div>
+                        <div>98377633<div class="host-status status-poweroff"></div></div>
+                        <div>38379636<div class="host-status status-running"></div></div>
+                        <div>78377637<div class="host-status status-sleep"></div></div>
+                        <div>88376639<div class="host-status status-running"></div></div>
+                    </td>
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block scripts %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            var ctx1 = $(".hostChart").get(0).getContext("2d");
+            var ctx2 = $(".hostChart").get(1).getContext("2d");
+            var ctx3 = $(".hostChart").get(2).getContext("2d");
+
+
+            var data = {
+                labels : ["January","February","March","April","May","June","July"],
+                datasets : [
+                    {
+                        fillColor : "rgba(220,220,220,0.5)",
+                        strokeColor : "rgba(220,220,220,1)",
+                        pointColor : "rgba(220,220,220,1)",
+                        pointStrokeColor : "#fff",
+                        data : [65,59,90,81,56,55,40]
+                    },
+                    {
+                        fillColor : "rgba(151,187,205,0.5)",
+                        strokeColor : "rgba(151,187,205,1)",
+                        pointColor : "rgba(151,187,205,1)",
+                        pointStrokeColor : "#fff",
+                        data : [28,48,40,19,96,27,100]
+                    }
+                ]
+            };
+            var myNewChart1 = new Chart(ctx1).Line(data);
+            var myNewChart2 = new Chart(ctx2).Line(data);
+            var myNewChart3 = new Chart(ctx3).Line(data);
+
+
+        });
+    </script>
+{% endblock %}

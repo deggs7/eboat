@@ -37,6 +37,8 @@ var map_size = [15, 835, 0, 470]; //地图的活跃范围
 var path_count = [9, 20]; //每支船的路径条数，在给定范围内的随机整数
 var boat_name_length = 8; //船编号的长度
 
+var colors =  ['#CE0000','#FF0080','#E800E8','#921AFF','#00CACA','#02DF82','#00DB00','#9AFF02','#E1E100','#EAC100','#FF9224','#FF5809','#B87070','#AFAF61','#9999CC','#B766AD' ];
+
 function createBoats(){
     var boats = [];
     for (var k=1; k<=boat_count; k++){
@@ -63,6 +65,7 @@ function addboat(id, x, y){
 
 function removeboat(id){
     $("#"+id).remove();
+    $(".trace"+id).remove();
 }
 
 function moveboat_by_path(id, path){
@@ -75,6 +78,8 @@ function moveboat_by_path(id, path){
 
     var lx = end[0] - start[0];
     var ly = end[1] - start[1];
+
+    var trace_color = colors[GetRandomInteger(0, colors.length)];
 
     function animFun(time){
         var per = Math.min(1.0, (new Date - startTime) / dur);
@@ -91,8 +96,15 @@ function moveboat_by_path(id, path){
             }
         }else{
             try{
-                document.getElementById(id).style.left = Math.round(start[0] + lx * per) + "px";
-                document.getElementById(id).style.top= Math.round(start[1] + ly * per) + "px";
+                var x_position = Math.round(start[0] + lx * per) + "px";
+                var y_position = Math.round(start[1] + ly * per) + "px";
+                var x_trace = (Math.round(start[0] + lx * per) + 15) + "px";
+                var y_trace = (Math.round(start[1] + ly * per) + 15) + "px";
+                document.getElementById(id).style.left = x_position;
+                document.getElementById(id).style.top= y_position;
+
+                map.append("<div class='boat-track trace"+id+"' style='background-color:"+trace_color+"; left:"+x_trace+"; top:"+y_trace+"; '/>");
+
             }catch(e){
                 clearTimeout(timerId);
             }

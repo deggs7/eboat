@@ -98,7 +98,7 @@ body {
 }
 
 .boat-icon {
-    z-index: 9999;
+    z-index: 1000;
     background-image: url(/static/img/boat.png);
     width: 30px;
     height: 30px;
@@ -112,10 +112,11 @@ body {
     margin-bottom: 20px;
 }
 
-.cabinet {
+.table > tbody > tr > td.cabinet {
+    vertical-align: middle;
 }
+
 .cabinet img {
-    margin-top: 200px;
     width: 60px;
     height: 100px;
 }
@@ -142,4 +143,13 @@ body {
 }
 .status-poweroff {
     background-color: orangered;
+}
+
+.boat-track {
+    z-index: 999;
+    background-color: #333;
+    width: 2px;
+    height: 2px;
+    border-radius: 1px;
+    position: absolute;
 }
